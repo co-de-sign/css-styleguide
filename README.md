@@ -26,82 +26,102 @@ We strongly recommend reading the full [RSCSS](http://rscss.io) documentation to
 
 ## Coding style
 
-**You should:**
+Prefer hexadecimal color codes `#f7931e` with lowercase letters and abbreviate them to three characters when possible `#f36`.
 
-- Use soft-tabs with a two space indent
-- Put spaces before `{` in rule declarations (right: `.foo {}`; wrong: `.foo{}`)
-- Use `//` for comment blocks (instead of `/* */`)
+### Color variables
 
-**Would be nice if you:**
+We recommend using variables to set project's color palette with names beginning with `color-`. So when using it in any part of project it's implicit that is a color variable and we can take advantage of text auto complete listing only color variables.
 
-- Avoid using `margin-top` and prefer the use of only `margin-bottom`. With all your elements having margin only below them it is easier to organize the overall structure.
+When defining the color variables for a project, you can approach it in two different ways.
 
-## Order of properties declarations
-
-In order for us to have a standard way of writing CSS we should always try to declare the properties in a specific order. This is not a "frozen" thing, and it is flexible, but the main guideline here is to group some properties together and have these blocks in a specific order.
-
-The declarations groups are the following (and should follow this order):
-
-1. **Mixins' includes**: these should be the first instructions to be declared. It is not a property, and it should be declared before so it can be overridden by properties declared below it.
-
-2. **Box model properties**: The CSS box model is essentially a box that wraps around every HTML element. These are `width`, `height`, `padding`, `margin`, and `border`.
-
-3. **Other layout/positioning properties**: properties with the function of positioning elements such as `display`, `position`, `top`, `right`, `bottom`, and `left`.
-
-4. **Typography**: properties such as the `font` properties (i.e.: `font-size`, `font-family`, etc.), `text` properties (i.e.: `text-transform`, `text-decoration`, etc.) and `line-height`.
-
-5. **Aesthetic/cosmetic properties**: properties that change the elements visual aspects without changing its size or positioning, such as `background`, `color`, `box-shadow`, `opacity`, `cursor`, etc.
-
-6. **Transition**: `transition` properties (i.e.: `transition-delay`, `transition-duration`, `transition-property`, and `transition-timing-function`).
-
-These groups should be separated by a blank line.
-
-**Example**
+The first way is to set variables for every hexadecimal that will be used in the project. Some of these colors will be shades of another color, so you can name them with the suffix `-light`, `-dark`, `xlight`, `x-dark`, `xx-dark`, and so on, like this:
 
 ```scss
+$color-action: #2aaafe;
+$color-action-hover: #018fec;
+
+$color-error: #de4163;
+
+$color-coolgray: #c4ced9;
+$color-coolgray-light: #f0f2f5;
+$color-coolgray-xlight: #f8f9fa;
+$color-coolgray-dark: #8d969b;
+$color-coolgray-xdark: #51565b;
+```
+
+> [Here](http://codepen.io/caepenna/pen/qqBYRN) is an example of this applied in a component.
+
+The prefered way to do this, however, is to set only the base colors. And then, when using them, use the function `mix` to mix the base color with either black (`#000`) or white (`#fff`) the amount desired.
+
+```scss
+$color-action: #2aaafe;
+$color-error: #de4163;
+$color-coolgray: #c4ced9;
+
 .button {
-  @include btn;
-
-  width: 240px;
-  margin-top: 2rem;
-  margin-bottom: 4rem;
-
-  position: absolute;
-  top: 8rem;
-
-  font-size: $font-size-body;
-  text-transform: uppercase;
-  text-decoration: underline;
-
-  color: $color-highlight;
-  background-color: $color-dark;
-  opacity: 0.6;
-  box-shadow: 0 2px 4px rgba(#000, 0.2);
-
-  transition: opacity 0.2s ease-in;
+  background-color: $color-action;
+  &:hover {
+    background-color: mix(#000, $color-action, 10%);
+  }
 }
 ```
 
-Another relevant pattern to be followed is declaring abscissa properties before ordinate properties if both exists. For example, `transformX` should come before `transformY`; and `width` should come before `height`.
+> [Here](http://codepen.io/caepenna/pen/jVOxvo) is an example of this applied in a component.
 
-Properties should also be spread when possible to avoid conflicts of overriding when not wanted.
+This way you won't need multiple variables and also will have flexibility to chose shades of colors for your interface as desired when designing the UI. It is recommended to limit the number of shades used to simplify the interface visually, but that limitation can vary a lot from project to project.
 
-**Avoid**
+Also, when using color variables, create them for colors and then create a different variable with a name that specify its use, the following way.
 
 ```scss
-.bg {
-  background: fixed $color-main url(../assets/bg.png) center top no-repeat;
-}
+$color-blue: #2aaafe;
+$color-pink: #de4163;
+$color-coolgray: #c4ced9;
+
+$color-action: $color-blue;
+$color-error: $color-pink;
 ```
 
-**Prefer**
+### Grays
+
+When using shades of gray on your project, set the values using the HSL format (e.g.: `hsl(0, 0%, 30%)`).
+
+HSL stands for hue, saturation, and lightness - and represents a cylindrical-coordinate representation of colors.
+
+An HSL color value is specified with: `hsl(hue, saturation, lightness)`. This format makes it easy to see how dark or light the shade of gray is, and easy to change it by only changing the `lightness` value.
+
+**Right**
 
 ```scss
-.bg {
-  background-attachment: fixed;
-  background-color: $color-main;
-  background-image: url(../assets/bg.png);
-  background-position: center top;
-  background-repeat: no-repeat;
-}
+color: hsl(0, 0%, 25%); // dark gray
+color: hsl(0, 0%, 40%); // medium gray
+color: hsl(0, 0%, 80%); // light gray
+```
+
+**Wrong**
+
+```scss
+color: #404040; // dark gray
+color: $color-gray-40; // medium gray
+color: #ccc; // light gray
+```
+
+It is also important to avoid many different shades of gray in the project. It is not common for a project to have more than 5 different grays, and in such case the project should be optimized to use only the grays necessary in order to improve the overall UX.
+
+In order to a better management of the amount of grays and the use of them, we suggest you start the css file for colors with the color palette documented right away.
+
+```scss
+// light gray for background: hsl(0, 0%, 90%)
+// light gray for font: hsl(0, 0%, 70%)
+// dark gray for background: hsl(0, 0%, 40%)
+// dark gray for font: hsl(0, 0%, 30%)
+```
+
+### Color Names
+
+It should never be used in a project. Use it only for fast prototyping and testing specific components.
+
+```scss
+color: red;
+color: gold;
+color: fuchsia;
 ```
