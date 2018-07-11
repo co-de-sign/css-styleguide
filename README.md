@@ -295,6 +295,7 @@ Mind that the grid works without setting a width, but it might be compromise the
 _Need to talk about offest_
 
 All set! You're good to go!
+[Codepen](https://codepen.io/caepenna/pen/kXqyyJ)
 
 ## Vertical grid
 
