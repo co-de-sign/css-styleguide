@@ -1,5 +1,7 @@
 # CSS Styleguide
 
+This guide contains our best practices and suggestions that fit our work environment. Please be welcome to fork and/or make Pull Requests with suggestions, new topics, correcting us on typos, grammar, wrong assumptions, broken links, unclear text, etc. Pull Requests should contain a short description explaining what it is and its importancy.
+
 ## Menu
 - [Class naming convention](#class-naming-convention)
 - [Coding style](#coding-style)
