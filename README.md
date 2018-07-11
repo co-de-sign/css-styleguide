@@ -323,3 +323,38 @@ p { line-height: 17px; }
 ```
 
 **Furhter reading on this subject** [4 Simple Steps to Vertical Rhythm](http://typecast.com/blog/4-simple-steps-to-vertical-rhythm) [Aesthetic Sass 3: Typography and Vertical Rhythm](https://scotch.io/tutorials/aesthetic-sass-3-typography-and-vertical-rhythm) [CSS Baseline: The Good, The Bad And The Ugly](https://www.smashingmagazine.com/2012/12/css-baseline-the-good-the-bad-and-the-ugly/) [Using Sass & Compass Vertical Rhythm to set up typography defaults in a project.](https://medium.com/@amlinarev/using-sass-compass-vertical-rhythm-to-set-up-typography-defaults-in-a-project-34fe2f1d2c02#.4qrws1cww)
+
+## Print
+
+It's important for some pages to have a specific layout for print, especially pages with lots of text.
+
+We recommend that print properties be declared in the same component file. But instead of component's properties to be in a separated media query:
+
+**Right**
+
+```scss
+.example-component{
+  width: 100%;
+}
+
+@media print {
+  .example-component {
+    width: 80%;
+  }
+}
+```
+
+**Wrong**
+
+```scss
+.example-component{
+  width: 100%;
+  @media print {
+    width: 80%;
+  }
+}
+```
+
+Just like we follow RSCSS on CSS organization and class naming, we based our instructions in this post below.
+
+We strongly recommend reading it: [I totally forgot about print style sheets](https://uxdesign.cc/i-totally-forgot-about-print-style-sheets-f1e6604cfd6#.702e2vrhq)
