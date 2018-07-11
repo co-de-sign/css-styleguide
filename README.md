@@ -359,3 +359,7 @@ We recommend that print properties be declared in the same component file. But i
 Just like we follow RSCSS on CSS organization and class naming, we based our instructions in this post below.
 
 We strongly recommend reading it: [I totally forgot about print style sheets](https://uxdesign.cc/i-totally-forgot-about-print-style-sheets-f1e6604cfd6#.702e2vrhq)
+
+## Stylesheets folders architecutre
+
+Codeign created the [Ambience-Base-Components Style Structure](https://github.com/co-de-sign/abcss) with the collaboration of the members, and after some iterations we come in a version that we believe is the best version to be in this styleguide
