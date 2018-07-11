@@ -4,7 +4,7 @@ This guide contains our best practices and suggestions that fit our work environ
 
 [Contributing to the guide](https://github.com/co-de-sign/css-styleguide/blob/master/CONTRIBUTING.md)
 
-## Menu
+## Contents
 - [Class naming convention](#class-naming-convention)
 - [Coding style](#coding-style)
 - [Colors](#colors)
